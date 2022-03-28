@@ -1,0 +1,119 @@
+"""
+Proposals from the subDAO
+"""
+type ProposalEntity @entity {
+  """
+  proposal id
+  """
+  id: ID!
+  """
+  proposer address
+  """
+  proposer: Bytes!
+  """
+  proposal signature
+  """
+  signatures: [String!]!
+  """
+  proposal calldata
+  """
+  calldatas: [Bytes!]!
+  """
+  proposal endBlock
+  """
+  endBlock: Int!
+  """
+  proposal description
+  """
+  description: String!
+  """
+  status from last action
+  """
+  status: Int!
+  """
+  voted by addresses
+  """
+  votedBy: [Bytes!]!
+  """
+  number of votes against
+  """
+  votesAgainst: Int!
+  """
+  number of votes for
+  """
+  votesFor: Int!
+  """
+  number of votes abstain
+  """
+  votesAbstain: Int!
+}
+
+"""
+SubDAO members
+"""
+type SubDAOMemberEntity @entity {
+  """
+  member address
+  """
+  id: ID!
+  """
+  tx timestamp of when this member was added to the subDAO
+  """
+  since: Int!
+  """
+  tx timestamp of when this member left the subDAO
+  """
+  until: Int!
+  """
+  status of this member (0: active, 1: inactive)
+  """
+  status: Int!
+  """
+  total number of votes
+  """
+  votes: Int!
+}
+
+"""
+Ambassadors Entities
+"""
+type AmbassadorsEntityEntity @entity {
+  """
+  entity address
+  """
+  id: ID!
+  """
+  entity status  (0: active, 1: inactive)
+  """
+  status: Int!
+  """
+  array of ambassadors addresses
+  """
+  ambassadors: [AmbassadorEntity!]!
+}
+
+"""
+Ambassadors
+"""
+type AmbassadorEntity @entity {
+  """
+  ambassador address
+  """
+  id: ID!
+  """
+  tx timestamp of when this ambassador was added to the subDAO
+  """
+  since: Int!
+  """
+  tx timestamp of when this ambassador left the subDAO
+  """
+  until: Int!
+  """
+  status of this ambassador (0: active, 1: inactive)
+  """
+  status: Int!
+  """
+  array of communities addresses this ambassador is ambassador for
+  """
+  communities: [Bytes!]!
+}

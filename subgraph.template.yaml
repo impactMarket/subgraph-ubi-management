@@ -1,0 +1,72 @@
+specVersion: 0.0.2
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum/contract
+    name: SubDAO
+    network: {{network}}
+    source:
+      address: "{{SubDAO}}"
+      abi: SubDAO
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - ProposalEntity
+      abis:
+        - name: SubDAO
+          file: ./abis/SubDAO.json
+      eventHandlers:
+        - event: ProposalCanceled(uint256)
+          handler: handleProposalCanceled
+        - event: ProposalCreated(uint256,address,string[],bytes[],uint256,string)
+          handler: handleProposalCreated
+        - event: ProposalExecuted(uint256)
+          handler: handleProposalExecuted
+        - event: VoteCast(indexed address,uint256,uint8,uint256,string)
+          handler: handleVoteCast
+        - event: MemberAdded(address)
+          handler: handleMemberAdded
+        - event: MemberRemoved(address)
+          handler: handleMemberRemoved
+      file: ./src/mappings/subdao.ts
+  - kind: ethereum/contract
+    name: Ambassadors
+    network: {{network}}
+    source:
+      address: "{{Ambassadors}}"
+      abi: Ambassadors
+      startBlock: {{startBlock}}
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.5
+      language: wasm/assemblyscript
+      entities:
+        - AmbassadorEntity
+      abis:
+        - name: Ambassadors
+          file: ./abis/Ambassadors.json
+      eventHandlers:
+        - event: EntityAdded(indexed address)
+          handler: handleEntityAdded
+        - event: EntityRemoved(indexed address)
+          handler: handleEntityRemoved
+        - event: EntityAccountReplaced(uint256,indexed address,indexed address)
+          handler: handleEntityAccountReplaced
+        - event: AmbassadorAdded(indexed address,indexed address)
+          handler: handleAmbassadorAdded
+        - event: AmbassadorRemoved(indexed address,indexed address)
+          handler: handleAmbassadorRemoved
+        - event: AmbassadorAccountReplaced(uint256,indexed address,indexed address,indexed address)
+          handler: handleAmbassadorAccountReplaced
+        - event: AmbassadorReplaced(indexed address,indexed address,indexed address)
+          handler: handleAmbassadorReplaced
+        - event: AmbassadorTransfered(indexed address,indexed address,indexed address)
+          handler: handleAmbassadorTransfered
+        - event: AmbassadorToCommunityUpdated(indexed address,indexed address,indexed address)
+          handler: handleAmbassadorToCommunityUpdated
+        - event: CommunityRemoved(indexed address,indexed address)
+          handler: handleCommunityRemoved
+      file: ./src/mappings/ambassadors.ts

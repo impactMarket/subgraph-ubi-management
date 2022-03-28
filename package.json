@@ -1,0 +1,35 @@
+{
+    "name": "subgraph-ubi-management",
+    "license": "Apache-2.0",
+    "engines": {
+        "node": ">=16"
+    },
+    "scripts": {
+        "codegen": "graph codegen",
+        "build": "graph build",
+        "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ impactmarket/ubi-management",
+        "deploy:alfajores": "graph deploy --node https://api.thegraph.com/deploy/ impactmarket/alfajores-ubi-management",
+        "create-local": "graph create --node http://localhost:8020/ impactmarket/ubi-management",
+        "remove-local": "graph remove --node http://localhost:8020/ impactmarket/ubi-management",
+        "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 impactmarket/ubi-management",
+        "prettier": "prettier --write \"./{src,tests}/**/*.ts\"",
+        "prettier:dryrun": "prettier \"./{src,tests}/**/*.ts\"",
+        "eslint": "eslint --fix \"./{src,tests}/**/*.ts\"",
+        "eslint:dryrun": "eslint \"./{src,tests}/**/*.ts\"",
+        "prepare:mainnet": "mustache config/mainnet.json subgraph.template.yaml > subgraph.yaml",
+        "prepare:alfajores": "mustache config/alfajores.json subgraph.template.yaml > subgraph.yaml"
+    },
+    "dependencies": {
+        "@graphprotocol/graph-cli": "0.27.0",
+        "@graphprotocol/graph-ts": "0.25.0",
+        "matchstick-as": "0.4.0"
+    },
+    "devDependencies": {
+        "@babel/core": "^7.16.10",
+        "eslint": "^8.9.0",
+        "eslint-config-impact-market": "impactMarket/eslint-config-impact-market",
+        "mustache": "4.2.0",
+        "prettier": "^2.4.1",
+        "typescript": "~4.1.6"
+    }
+}
