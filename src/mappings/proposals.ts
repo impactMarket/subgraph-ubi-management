@@ -1,9 +1,4 @@
-import {
-    ProposalCanceled,
-    ProposalCreated,
-    ProposalExecuted,
-    VoteCast
-} from '../../generated/SubDAO/SubDAO';
+import { ProposalCanceled, ProposalCreated, ProposalExecuted, VoteCast } from '../../generated/SubDAO/SubDAO';
 import { ProposalEntity, SubDAOMemberEntity } from '../../generated/schema';
 
 export function handleProposalCreated(event: ProposalCreated): void {
@@ -53,23 +48,22 @@ export function handleVoteCast(event: VoteCast): void {
 
         votedBy.push(event.params.voter);
         proposal.votedBy = votedBy;
-        switch(event.params.support) {
+        switch (event.params.support) {
             case 0:
-                proposal.votesAgainst ++;
+                proposal.votesAgainst++;
                 break;
             case 1:
-                proposal.votesFor ++;
+                proposal.votesFor++;
                 break;
             case 2:
-                proposal.votesAbstain ++;
+                proposal.votesAbstain++;
                 break;
         }
         proposal.save();
     }
 
     if (member) {
-        member.votes ++;
+        member.votes++;
         member.save();
     }
 }
-

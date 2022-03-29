@@ -1,10 +1,20 @@
 import { assert, clearStore, test } from 'matchstick-as/assembly/index';
 
 import { createMemberAddedEvent } from './utils/members';
-import { createProposalCanceledEvent, createProposalCreatedEvent, createProposalExecutedEvent, createVoteCastEvent } from './utils/proposals';
+import {
+    createProposalCanceledEvent,
+    createProposalCreatedEvent,
+    createProposalExecutedEvent,
+    createVoteCastEvent
+} from './utils/proposals';
 import { handleMemberAdded } from '../src/mappings/members';
-import { handleProposalCanceled, handleProposalCreated, handleProposalExecuted, handleVoteCast } from '../src/mappings/proposals';
-import { memberAddress } from './utils/constants'
+import {
+    handleProposalCanceled,
+    handleProposalCreated,
+    handleProposalExecuted,
+    handleVoteCast
+} from '../src/mappings/proposals';
+import { memberAddress } from './utils/constants';
 
 export { handleProposalCreated, createProposalCanceledEvent, handleProposalExecuted, handleMemberAdded };
 
@@ -21,23 +31,11 @@ test('should create proposal', () => {
     clearStore();
 
     const proposalId = 1;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'calldatas',
-        `[${calldatas.join(',')}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'calldatas', `[${calldatas.join(',')}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'status', '0');
 });
 
@@ -45,14 +43,7 @@ test('should execute proposal', () => {
     clearStore();
 
     const proposalId = 2;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
@@ -60,12 +51,7 @@ test('should execute proposal', () => {
 
     handleProposalExecuted(executed);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'calldatas',
-        `[${calldatas.join(',')}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'calldatas', `[${calldatas.join(',')}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'status', '1');
 });
 
@@ -73,14 +59,7 @@ test('should cancel proposal', () => {
     clearStore();
 
     const proposalId = 3;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
@@ -88,12 +67,7 @@ test('should cancel proposal', () => {
 
     handleProposalCanceled(canceled);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'calldatas',
-        `[${calldatas.join(',')}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'calldatas', `[${calldatas.join(',')}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'status', '2');
 });
 
@@ -107,27 +81,15 @@ test('should vote for on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
-    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteFor, 1, "");
+    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteFor, 1, '');
 
     handleVoteCast(voteCast);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'votedBy',
-        `[${memberAddress[1]}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedBy', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesFor', '1');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAgainst', '0');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAbstain', '0');
@@ -145,27 +107,15 @@ test('should vote against on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
-    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteAgainst, 1, "");
+    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteAgainst, 1, '');
 
     handleVoteCast(voteCast);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'votedBy',
-        `[${memberAddress[1]}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedBy', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesFor', '0');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAgainst', '1');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAbstain', '0');
@@ -183,27 +133,15 @@ test('should vote abstain on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
-    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteAbstain, 1, "");
+    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteAbstain, 1, '');
 
     handleVoteCast(voteCast);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'votedBy',
-        `[${memberAddress[1]}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedBy', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesFor', '0');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAgainst', '0');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAbstain', '1');
@@ -221,27 +159,15 @@ test('should vote abstain on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
-    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteAbstain, 1, "");
+    const voteCast = createVoteCastEvent(memberAddress[1], proposalId, voteAbstain, 1, '');
 
     handleVoteCast(voteCast);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId.toString(),
-        'votedBy',
-        `[${memberAddress[1]}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedBy', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesFor', '0');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAgainst', '0');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votesAbstain', '1');
@@ -261,19 +187,12 @@ test('should receive multiple votes on proposal', () => {
     handleMemberAdded(member3);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(
-        proposalId,
-        memberAddress[0],
-        signatures,
-        calldatas,
-        10,
-        descriptions
-    );
+    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
 
     handleProposalCreated(proposal);
 
-    const voteCast1 = createVoteCastEvent(memberAddress[1], proposalId, voteFor, 1, "");
-    const voteCast2 = createVoteCastEvent(memberAddress[2], proposalId, voteAgainst, 2, "");
+    const voteCast1 = createVoteCastEvent(memberAddress[1], proposalId, voteFor, 1, '');
+    const voteCast2 = createVoteCastEvent(memberAddress[2], proposalId, voteAgainst, 2, '');
 
     handleVoteCast(voteCast1);
     handleVoteCast(voteCast2);
@@ -291,7 +210,6 @@ test('should receive multiple votes on proposal', () => {
     assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '1');
     assert.fieldEquals('SubDAOMemberEntity', memberAddress[2], 'votes', '1');
 });
-
 
 test('should vote in multiple proposals', () => {
     clearStore();
@@ -324,24 +242,14 @@ test('should vote in multiple proposals', () => {
     handleProposalCreated(proposal1);
     handleProposalCreated(proposal2);
 
-    const voteCast1 = createVoteCastEvent(memberAddress[1], proposalId1, voteFor, 1, "");
-    const voteCast2 = createVoteCastEvent(memberAddress[1], proposalId2, voteAgainst, 1, "");
+    const voteCast1 = createVoteCastEvent(memberAddress[1], proposalId1, voteFor, 1, '');
+    const voteCast2 = createVoteCastEvent(memberAddress[1], proposalId2, voteAgainst, 1, '');
 
     handleVoteCast(voteCast1);
     handleVoteCast(voteCast2);
 
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId1.toString(),
-        'votedBy',
-        `[${memberAddress[1]}]`
-    );
-    assert.fieldEquals(
-        'ProposalEntity',
-        proposalId2.toString(),
-        'votedBy',
-        `[${memberAddress[1]}]`
-    );
+    assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votedBy', `[${memberAddress[1]}]`);
+    assert.fieldEquals('ProposalEntity', proposalId2.toString(), 'votedBy', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votesFor', '1');
     assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votesAgainst', '0');
     assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votesAbstain', '0');

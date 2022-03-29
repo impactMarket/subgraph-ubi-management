@@ -61,7 +61,7 @@ dataSources:
           handler: handleAmbassadorRemoved
         - event: AmbassadorAccountReplaced(uint256,indexed address,indexed address,indexed address)
           handler: handleAmbassadorAccountReplaced
-        - event: AmbassadorReplaced(indexed address,indexed address,indexed address)
+        - event: AmbassadorReplaced(uint256,indexed address,indexed address,indexed address)
           handler: handleAmbassadorReplaced
         - event: AmbassadorTransfered(indexed address,indexed address,indexed address)
           handler: handleAmbassadorTransfered

@@ -1,6 +1,17 @@
-import { Address, Bytes, store } from "@graphprotocol/graph-ts";
-import { AmbassadorAccountReplaced, AmbassadorAdded, AmbassadorRemoved, AmbassadorReplaced, AmbassadorToCommunityUpdated, AmbassadorTransfered, CommunityRemoved, EntityAccountReplaced, EntityAdded, EntityRemoved } from "../../generated/Ambassadors/Ambassadors";
-import { AmbassadorEntity, AmbassadorsEntityEntity } from "../../generated/schema";
+import { Address, Bytes, store } from '@graphprotocol/graph-ts';
+import {
+    AmbassadorAccountReplaced,
+    AmbassadorAdded,
+    AmbassadorRemoved,
+    AmbassadorReplaced,
+    AmbassadorToCommunityUpdated,
+    AmbassadorTransfered,
+    CommunityRemoved,
+    EntityAccountReplaced,
+    EntityAdded,
+    EntityRemoved
+} from '../../generated/Ambassadors/Ambassadors';
+import { AmbassadorEntity, AmbassadorsEntityEntity } from '../../generated/schema';
 
 export function handleEntityAdded(event: EntityAdded): void {
     const id = `${event.params.entity.toHex()}`;
@@ -68,11 +79,16 @@ export function handleAmbassadorAccountReplaced(event: AmbassadorAccountReplaced
     const newAmbassador = new AmbassadorEntity(newId);
     const entity = AmbassadorsEntityEntity.load(entityId)!;
 
-    let entityAmbassadors = entity.ambassadors;
+    const entityAmbassadors = entity.ambassadors;
+    const newEntityAmbassadors: string[] = [];
 
-    entityAmbassadors = entityAmbassadors.filter((ambassador: string) => Address.fromString(ambassador).notEqual(event.params.oldAccount));
-    entityAmbassadors.push(newId);
-    entity.ambassadors = entityAmbassadors;
+    for (let i = 0; i < entityAmbassadors.length; i++) {
+        if (Address.fromString(entityAmbassadors[i]).notEqual(event.params.oldAccount)) {
+            newEntityAmbassadors.push(entityAmbassadors[i]);
+        }
+    }
+    newEntityAmbassadors.push(newId);
+    entity.ambassadors = newEntityAmbassadors;
 
     newAmbassador.since = oldAmbassador.since;
     newAmbassador.until = oldAmbassador.until;
@@ -97,10 +113,15 @@ export function handleAmbassadorTransfered(event: AmbassadorTransfered): void {
     const oldEntity = AmbassadorsEntityEntity.load(event.params.oldEntity.toHex())!;
     const newEntity = AmbassadorsEntityEntity.load(event.params.newEntity.toHex())!;
 
-    let oldEntityAmbassadors = oldEntity.ambassadors;
+    const oldEntityAmbassadors = oldEntity.ambassadors;
+    const newOldEntityAmbassadors: string[] = [];
 
-    oldEntityAmbassadors = oldEntityAmbassadors.filter((ambassador: string) => Address.fromString(ambassador).notEqual(event.params.ambassador));
-    oldEntity.ambassadors = oldEntityAmbassadors;
+    for (let i = 0; i < oldEntityAmbassadors.length; i++) {
+        if (Address.fromString(oldEntityAmbassadors[i]).notEqual(event.params.ambassador)) {
+            newOldEntityAmbassadors.push(oldEntityAmbassadors[i]);
+        }
+    }
+    oldEntity.ambassadors = newOldEntityAmbassadors;
 
     const newEntityAmbassadors = newEntity.ambassadors;
 
@@ -112,17 +133,18 @@ export function handleAmbassadorTransfered(event: AmbassadorTransfered): void {
 }
 
 export function handleAmbassadorToCommunityUpdated(event: AmbassadorToCommunityUpdated): void {
-    if (
-        event.params.fromAmbassador.equals(
-            Address.fromString('0x0000000000000000000000000000000000000000')
-        )
-    ) {
+    if (event.params.fromAmbassador.equals(Address.fromString('0x0000000000000000000000000000000000000000'))) {
         const fromId = `${event.params.fromAmbassador.toHex()}`;
         const fromAmbassador = AmbassadorEntity.load(fromId)!;
-        let communitiesFrom = fromAmbassador.communities;
+        const communitiesFrom = fromAmbassador.communities;
+        const newCommunitiesFrom: Bytes[] = [];
 
-        communitiesFrom = communitiesFrom.filter((community: Bytes) => community.notEqual(event.params.community));
-        fromAmbassador.communities = communitiesFrom;
+        for (let i = 0; i < communitiesFrom.length; i++) {
+            if (communitiesFrom[i].notEqual(event.params.community)) {
+                newCommunitiesFrom.push(communitiesFrom[i]);
+            }
+        }
+        fromAmbassador.communities = newCommunitiesFrom;
         fromAmbassador.save();
     }
     const toId = `${event.params.toAmbassador.toHex()}`;
@@ -140,9 +162,14 @@ export function handleCommunityRemoved(event: CommunityRemoved): void {
     const id = `${event.params.ambassador.toHex()}`;
     const ambassador = AmbassadorEntity.load(id)!;
 
-    let communitiesFrom = ambassador.communities;
+    const communitiesFrom = ambassador.communities;
+    const newCommunitiesFrom: Bytes[] = [];
 
-    communitiesFrom = communitiesFrom.filter((community: Bytes) => community.notEqual(event.params.community));
+    for (let i = 0; i < communitiesFrom.length; i++) {
+        if (communitiesFrom[i].notEqual(event.params.community)) {
+            newCommunitiesFrom.push(communitiesFrom[i]);
+        }
+    }
     ambassador.communities = communitiesFrom;
 
     ambassador.save();

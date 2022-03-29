@@ -97,16 +97,20 @@ export class AmbassadorReplaced__Params {
     this._event = event;
   }
 
-  get oldAmbassador(): Address {
-    return this._event.parameters[0].value.toAddress();
+  get ambassadorIndex(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
   }
 
-  get newAmbassador(): Address {
+  get entityAccount(): Address {
     return this._event.parameters[1].value.toAddress();
   }
 
-  get entity(): Address {
+  get oldAmbassador(): Address {
     return this._event.parameters[2].value.toAddress();
+  }
+
+  get newAmbassador(): Address {
+    return this._event.parameters[3].value.toAddress();
   }
 }
 
@@ -866,7 +870,7 @@ export class ReplaceAmbassadorAccountCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _newAccount(): Address {
+  get _newAmbassador(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 }
@@ -900,7 +904,7 @@ export class ReplaceEntityAccountCall__Inputs {
     return this._call.inputValues[0].value.toAddress();
   }
 
-  get _newAccount(): Address {
+  get _newEntity(): Address {
     return this._call.inputValues[1].value.toAddress();
   }
 }

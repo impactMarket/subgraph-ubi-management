@@ -1,5 +1,5 @@
-import { MemberAdded, MemberRemoved } from "../../generated/SubDAO/SubDAO";
-import { SubDAOMemberEntity } from "../../generated/schema";
+import { MemberAdded, MemberRemoved } from '../../generated/SubDAO/SubDAO';
+import { SubDAOMemberEntity } from '../../generated/schema';
 
 export function handleMemberAdded(event: MemberAdded): void {
     const id = `${event.params.member.toHex()}`;

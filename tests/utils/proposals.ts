@@ -62,12 +62,21 @@ export function createProposalExecutedEvent(id: i32): ProposalExecuted {
     return proposalExecutedEvent;
 }
 
-export function createVoteCastEvent(voter: string, proposalId: i32, support: i32, votes: i32, reason: string): VoteCast {
+export function createVoteCastEvent(
+    voter: string,
+    proposalId: i32,
+    support: i32,
+    votes: i32,
+    reason: string
+): VoteCast {
     const voteCastEvent = changetype<VoteCast>(newMockEvent());
 
     voteCastEvent.parameters = [];
     const voterParam = new ethereum.EventParam('voter', ethereum.Value.fromAddress(Address.fromString(voter)));
-    const proposalIdParam = new ethereum.EventParam('proposalId', ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(proposalId)));
+    const proposalIdParam = new ethereum.EventParam(
+        'proposalId',
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(proposalId))
+    );
     const supportParam = new ethereum.EventParam('support', ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(support)));
     const votesParam = new ethereum.EventParam('votes', ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(votes)));
     const reasonParam = new ethereum.EventParam('reason', ethereum.Value.fromString(reason));

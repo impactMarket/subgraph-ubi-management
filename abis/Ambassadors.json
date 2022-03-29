@@ -72,6 +72,18 @@
     "anonymous": false,
     "inputs": [
       {
+        "indexed": false,
+        "internalType": "uint256",
+        "name": "ambassadorIndex",
+        "type": "uint256"
+      },
+      {
+        "indexed": true,
+        "internalType": "address",
+        "name": "entityAccount",
+        "type": "address"
+      },
+      {
         "indexed": true,
         "internalType": "address",
         "name": "oldAmbassador",
@@ -81,12 +93,6 @@
         "indexed": true,
         "internalType": "address",
         "name": "newAmbassador",
-        "type": "address"
-      },
-      {
-        "indexed": true,
-        "internalType": "address",
-        "name": "entity",
         "type": "address"
       }
     ],
@@ -609,7 +615,7 @@
       },
       {
         "internalType": "address",
-        "name": "_newAccount",
+        "name": "_newAmbassador",
         "type": "address"
       }
     ],
@@ -627,7 +633,7 @@
       },
       {
         "internalType": "address",
-        "name": "_newAccount",
+        "name": "_newEntity",
         "type": "address"
       }
     ],
