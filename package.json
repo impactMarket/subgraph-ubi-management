@@ -8,7 +8,7 @@
         "codegen": "graph codegen",
         "build": "graph build",
         "deploy:mainnet": "graph deploy --node https://api.thegraph.com/deploy/ impactmarket/ubi-management",
-        "deploy:alfajores": "graph deploy --node https://api.thegraph.com/deploy/ impactmarket/alfajores-ubi-management",
+        "deploy:alfajores": "graph deploy --node https://api.thegraph.com/deploy/ impactmarket/ubi-management-alfajores",
         "create-local": "graph create --node http://localhost:8020/ impactmarket/ubi-management",
         "remove-local": "graph remove --node http://localhost:8020/ impactmarket/ubi-management",
         "deploy-local": "graph deploy --node http://localhost:8020/ --ipfs http://localhost:5001 impactmarket/ubi-management",
