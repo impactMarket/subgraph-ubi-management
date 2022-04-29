@@ -133,7 +133,7 @@ export function handleAmbassadorTransfered(event: AmbassadorTransfered): void {
 }
 
 export function handleAmbassadorToCommunityUpdated(event: AmbassadorToCommunityUpdated): void {
-    if (event.params.fromAmbassador.equals(Address.fromString('0x0000000000000000000000000000000000000000'))) {
+    if (event.params.fromAmbassador.notEqual(Address.fromString('0x0000000000000000000000000000000000000000'))) {
         const fromId = `${event.params.fromAmbassador.toHex()}`;
         const fromAmbassador = AmbassadorEntity.load(fromId)!;
         const communitiesFrom = fromAmbassador.communities;
