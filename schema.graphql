@@ -31,21 +31,17 @@ type ProposalEntity @entity {
   """
   status: Int!
   """
-  voted by addresses
+  addresses of votes against
   """
-  votedBy: [Bytes!]!
+  votedAgainst: [Bytes!]!
   """
-  number of votes against
+  addresses of votes for
   """
-  votesAgainst: Int!
+  votedFor: [Bytes!]!
   """
-  number of votes for
+  addresses of votes abstain
   """
-  votesFor: Int!
-  """
-  number of votes abstain
-  """
-  votesAbstain: Int!
+  votedAbstain: [Bytes!]!
 }
 
 """

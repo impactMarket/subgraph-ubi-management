@@ -14,10 +14,9 @@ export function handleProposalCreated(event: ProposalCreated): void {
     proposal.endBlock = event.params.endBlock.toI32();
     proposal.description = event.params.description;
     proposal.status = 0;
-    proposal.votedBy = [];
-    proposal.votesAgainst = 0;
-    proposal.votesFor = 0;
-    proposal.votesAbstain = 0;
+    proposal.votedAgainst = [];
+    proposal.votedFor = [];
+    proposal.votedAbstain = [];
     proposal.save();
 }
 
@@ -44,19 +43,24 @@ export function handleVoteCast(event: VoteCast): void {
     const member = SubDAOMemberEntity.load(event.params.voter.toHex());
 
     if (proposal) {
-        const votedBy = proposal.votedBy;
-
-        votedBy.push(event.params.voter);
-        proposal.votedBy = votedBy;
         switch (event.params.support) {
             case 0:
-                proposal.votesAgainst++;
+                const votedAgainst = proposal.votedAgainst;
+
+                votedAgainst.push(event.params.voter);
+                proposal.votedAgainst = votedAgainst;
                 break;
             case 1:
-                proposal.votesFor++;
+                const votedFor = proposal.votedFor;
+
+                votedFor.push(event.params.voter);
+                proposal.votedFor = votedFor;
                 break;
             case 2:
-                proposal.votesAbstain++;
+                const votedAbstain = proposal.votedAbstain;
+
+                votedAbstain.push(event.params.voter);
+                proposal.votedAbstain = votedAbstain;
                 break;
         }
         proposal.save();
