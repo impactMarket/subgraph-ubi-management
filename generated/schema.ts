@@ -22,10 +22,9 @@ export class ProposalEntity extends Entity {
     this.set("endBlock", Value.fromI32(0));
     this.set("description", Value.fromString(""));
     this.set("status", Value.fromI32(0));
-    this.set("votedBy", Value.fromBytesArray(new Array(0)));
-    this.set("votesAgainst", Value.fromI32(0));
-    this.set("votesFor", Value.fromI32(0));
-    this.set("votesAbstain", Value.fromI32(0));
+    this.set("votedAgainst", Value.fromBytesArray(new Array(0)));
+    this.set("votedFor", Value.fromBytesArray(new Array(0)));
+    this.set("votedAbstain", Value.fromBytesArray(new Array(0)));
   }
 
   save(): void {
@@ -107,40 +106,31 @@ export class ProposalEntity extends Entity {
     this.set("status", Value.fromI32(value));
   }
 
-  get votedBy(): Array<Bytes> {
-    let value = this.get("votedBy");
+  get votedAgainst(): Array<Bytes> {
+    let value = this.get("votedAgainst");
     return value!.toBytesArray();
   }
 
-  set votedBy(value: Array<Bytes>) {
-    this.set("votedBy", Value.fromBytesArray(value));
+  set votedAgainst(value: Array<Bytes>) {
+    this.set("votedAgainst", Value.fromBytesArray(value));
   }
 
-  get votesAgainst(): i32 {
-    let value = this.get("votesAgainst");
-    return value!.toI32();
+  get votedFor(): Array<Bytes> {
+    let value = this.get("votedFor");
+    return value!.toBytesArray();
   }
 
-  set votesAgainst(value: i32) {
-    this.set("votesAgainst", Value.fromI32(value));
+  set votedFor(value: Array<Bytes>) {
+    this.set("votedFor", Value.fromBytesArray(value));
   }
 
-  get votesFor(): i32 {
-    let value = this.get("votesFor");
-    return value!.toI32();
+  get votedAbstain(): Array<Bytes> {
+    let value = this.get("votedAbstain");
+    return value!.toBytesArray();
   }
 
-  set votesFor(value: i32) {
-    this.set("votesFor", Value.fromI32(value));
-  }
-
-  get votesAbstain(): i32 {
-    let value = this.get("votesAbstain");
-    return value!.toI32();
-  }
-
-  set votesAbstain(value: i32) {
-    this.set("votesAbstain", Value.fromI32(value));
+  set votedAbstain(value: Array<Bytes>) {
+    this.set("votedAbstain", Value.fromBytesArray(value));
   }
 }
 
