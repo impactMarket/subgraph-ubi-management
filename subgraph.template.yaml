@@ -3,11 +3,11 @@ schema:
   file: ./schema.graphql
 dataSources:
   - kind: ethereum/contract
-    name: SubDAO
+    name: ImpactMarketCouncil
     network: {{network}}
     source:
-      address: "{{SubDAO}}"
-      abi: SubDAO
+      address: "{{ImpactMarketCouncil}}"
+      abi: ImpactMarketCouncil
       startBlock: {{startBlock}}
     mapping:
       kind: ethereum/events
@@ -16,8 +16,8 @@ dataSources:
       entities:
         - ProposalEntity
       abis:
-        - name: SubDAO
-          file: ./abis/SubDAO.json
+        - name: ImpactMarketCouncil
+          file: ./abis/ImpactMarketCouncil.json
       eventHandlers:
         - event: ProposalCanceled(uint256)
           handler: handleProposalCanceled
@@ -31,7 +31,7 @@ dataSources:
           handler: handleMemberAdded
         - event: MemberRemoved(address)
           handler: handleMemberRemoved
-      file: ./src/mappings/subdao.ts
+      file: ./src/mappings/impactMarketCouncil.ts
   - kind: ethereum/contract
     name: Ambassadors
     network: {{network}}

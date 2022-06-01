@@ -1,6 +1,6 @@
 {
     "startBlock": 11016096,
     "network": "celo-alfajores",
-    "SubDAO": "0x7ddCAc3Bbd654b6c0aA46f6512A30dDbeF011F72",
+    "ImpactMarketCouncil": "0x7ddCAc3Bbd654b6c0aA46f6512A30dDbeF011F72",
     "Ambassadors": "0x5b7B94a63c64bdddCCa8eE2D1d823e359Fa77AB9"
 }
