@@ -2,7 +2,7 @@
 import { Address, ethereum } from '@graphprotocol/graph-ts';
 import { newMockEvent } from 'matchstick-as/assembly/defaults';
 
-import { MemberAdded, MemberRemoved } from '../../generated/SubDAO/SubDAO';
+import { MemberAdded, MemberRemoved } from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
 
 export function createMemberAddedEvent(member: string): MemberAdded {
     const memberAddedEvent = changetype<MemberAdded>(newMockEvent());

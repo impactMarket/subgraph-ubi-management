@@ -2,7 +2,7 @@
 import { Address, BigInt, Bytes, ethereum } from '@graphprotocol/graph-ts';
 import { newMockEvent } from 'matchstick-as/assembly/defaults';
 
-import { ProposalCanceled, ProposalCreated, ProposalExecuted, VoteCast } from '../../generated/SubDAO/SubDAO';
+import { ProposalCanceled, ProposalCreated, ProposalExecuted, VoteCast } from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
 
 export function createProposalCreatedEvent(
     id: i32,
