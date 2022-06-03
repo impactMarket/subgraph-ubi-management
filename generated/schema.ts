@@ -16,6 +16,7 @@ export class ProposalEntity extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
+    this.set("createdAt", Value.fromI32(0));
     this.set("proposer", Value.fromBytes(Bytes.empty()));
     this.set("signatures", Value.fromStringArray(new Array(0)));
     this.set("calldatas", Value.fromBytesArray(new Array(0)));
@@ -50,6 +51,15 @@ export class ProposalEntity extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get createdAt(): i32 {
+    let value = this.get("createdAt");
+    return value!.toI32();
+  }
+
+  set createdAt(value: i32) {
+    this.set("createdAt", Value.fromI32(value));
   }
 
   get proposer(): Bytes {
@@ -134,7 +144,7 @@ export class ProposalEntity extends Entity {
   }
 }
 
-export class SubDAOMemberEntity extends Entity {
+export class ImpactMarketCouncilMemberEntity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
@@ -147,19 +157,22 @@ export class SubDAOMemberEntity extends Entity {
 
   save(): void {
     let id = this.get("id");
-    assert(id != null, "Cannot save SubDAOMemberEntity entity without an ID");
+    assert(
+      id != null,
+      "Cannot save ImpactMarketCouncilMemberEntity entity without an ID"
+    );
     if (id) {
       assert(
         id.kind == ValueKind.STRING,
-        `Entities of type SubDAOMemberEntity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
+        `Entities of type ImpactMarketCouncilMemberEntity must have an ID of type String but the id '${id.displayData()}' is of type ${id.displayKind()}`
       );
-      store.set("SubDAOMemberEntity", id.toString(), this);
+      store.set("ImpactMarketCouncilMemberEntity", id.toString(), this);
     }
   }
 
-  static load(id: string): SubDAOMemberEntity | null {
-    return changetype<SubDAOMemberEntity | null>(
-      store.get("SubDAOMemberEntity", id)
+  static load(id: string): ImpactMarketCouncilMemberEntity | null {
+    return changetype<ImpactMarketCouncilMemberEntity | null>(
+      store.get("ImpactMarketCouncilMemberEntity", id)
     );
   }
 

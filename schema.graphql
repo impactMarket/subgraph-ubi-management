@@ -1,11 +1,15 @@
 """
-Proposals from the subDAO
+Proposals from the impactMarketCouncil
 """
 type ProposalEntity @entity {
   """
   proposal id
   """
   id: ID!
+  """
+  unix timestamp when the proposal was created
+  """
+  createdAt: Int!
   """
   proposer address
   """
@@ -45,19 +49,19 @@ type ProposalEntity @entity {
 }
 
 """
-SubDAO members
+ImpactMarketCouncil members
 """
-type SubDAOMemberEntity @entity {
+type ImpactMarketCouncilMemberEntity @entity {
   """
   member address
   """
   id: ID!
   """
-  tx timestamp of when this member was added to the subDAO
+  tx timestamp of when this member was added to the impactMarketCouncil
   """
   since: Int!
   """
-  tx timestamp of when this member left the subDAO
+  tx timestamp of when this member left the impactMarketCouncil
   """
   until: Int!
   """
@@ -97,11 +101,11 @@ type AmbassadorEntity @entity {
   """
   id: ID!
   """
-  tx timestamp of when this ambassador was added to the subDAO
+  tx timestamp of when this ambassador was added to the impactMarketCouncil
   """
   since: Int!
   """
-  tx timestamp of when this ambassador left the subDAO
+  tx timestamp of when this ambassador left the impactMarketCouncil
   """
   until: Int!
   """

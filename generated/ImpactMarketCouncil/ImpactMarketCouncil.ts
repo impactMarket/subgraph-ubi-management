@@ -246,7 +246,7 @@ export class VoteCast__Params {
   }
 }
 
-export class SubDAO__getActionsResult {
+export class ImpactMarketCouncil__getActionsResult {
   value0: Array<string>;
   value1: Array<Bytes>;
 
@@ -263,7 +263,7 @@ export class SubDAO__getActionsResult {
   }
 }
 
-export class SubDAO__getReceiptResultValue0Struct extends ethereum.Tuple {
+export class ImpactMarketCouncil__getReceiptResultValue0Struct extends ethereum.Tuple {
   get hasVoted(): boolean {
     return this[0].toBoolean();
   }
@@ -277,7 +277,7 @@ export class SubDAO__getReceiptResultValue0Struct extends ethereum.Tuple {
   }
 }
 
-export class SubDAO__proposalReceiptsResult {
+export class ImpactMarketCouncil__proposalReceiptsResult {
   value0: boolean;
   value1: i32;
   value2: BigInt;
@@ -300,7 +300,7 @@ export class SubDAO__proposalReceiptsResult {
   }
 }
 
-export class SubDAO__proposalsResult {
+export class ImpactMarketCouncil__proposalsResult {
   value0: BigInt;
   value1: Address;
   value2: BigInt;
@@ -344,9 +344,9 @@ export class SubDAO__proposalsResult {
   }
 }
 
-export class SubDAO extends ethereum.SmartContract {
-  static bind(address: Address): SubDAO {
-    return new SubDAO("SubDAO", address);
+export class ImpactMarketCouncil extends ethereum.SmartContract {
+  static bind(address: Address): ImpactMarketCouncil {
+    return new ImpactMarketCouncil("ImpactMarketCouncil", address);
   }
 
   MAX_VOTING_PERIOD(): BigInt {
@@ -437,14 +437,14 @@ export class SubDAO extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toAddress());
   }
 
-  getActions(_proposalId: BigInt): SubDAO__getActionsResult {
+  getActions(_proposalId: BigInt): ImpactMarketCouncil__getActionsResult {
     let result = super.call(
       "getActions",
       "getActions(uint256):(string[],bytes[])",
       [ethereum.Value.fromUnsignedBigInt(_proposalId)]
     );
 
-    return new SubDAO__getActionsResult(
+    return new ImpactMarketCouncil__getActionsResult(
       result[0].toStringArray(),
       result[1].toBytesArray()
     );
@@ -452,7 +452,7 @@ export class SubDAO extends ethereum.SmartContract {
 
   try_getActions(
     _proposalId: BigInt
-  ): ethereum.CallResult<SubDAO__getActionsResult> {
+  ): ethereum.CallResult<ImpactMarketCouncil__getActionsResult> {
     let result = super.tryCall(
       "getActions",
       "getActions(uint256):(string[],bytes[])",
@@ -463,7 +463,7 @@ export class SubDAO extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new SubDAO__getActionsResult(
+      new ImpactMarketCouncil__getActionsResult(
         value[0].toStringArray(),
         value[1].toBytesArray()
       )
@@ -473,7 +473,7 @@ export class SubDAO extends ethereum.SmartContract {
   getReceipt(
     _proposalId: BigInt,
     _voter: Address
-  ): SubDAO__getReceiptResultValue0Struct {
+  ): ImpactMarketCouncil__getReceiptResultValue0Struct {
     let result = super.call(
       "getReceipt",
       "getReceipt(uint256,address):((bool,uint8,uint96))",
@@ -483,7 +483,7 @@ export class SubDAO extends ethereum.SmartContract {
       ]
     );
 
-    return changetype<SubDAO__getReceiptResultValue0Struct>(
+    return changetype<ImpactMarketCouncil__getReceiptResultValue0Struct>(
       result[0].toTuple()
     );
   }
@@ -491,7 +491,7 @@ export class SubDAO extends ethereum.SmartContract {
   try_getReceipt(
     _proposalId: BigInt,
     _voter: Address
-  ): ethereum.CallResult<SubDAO__getReceiptResultValue0Struct> {
+  ): ethereum.CallResult<ImpactMarketCouncil__getReceiptResultValue0Struct> {
     let result = super.tryCall(
       "getReceipt",
       "getReceipt(uint256,address):((bool,uint8,uint96))",
@@ -505,7 +505,9 @@ export class SubDAO extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      changetype<SubDAO__getReceiptResultValue0Struct>(value[0].toTuple())
+      changetype<ImpactMarketCouncil__getReceiptResultValue0Struct>(
+        value[0].toTuple()
+      )
     );
   }
 
@@ -620,7 +622,7 @@ export class SubDAO extends ethereum.SmartContract {
   proposalReceipts(
     param0: BigInt,
     param1: Address
-  ): SubDAO__proposalReceiptsResult {
+  ): ImpactMarketCouncil__proposalReceiptsResult {
     let result = super.call(
       "proposalReceipts",
       "proposalReceipts(uint256,address):(bool,uint8,uint96)",
@@ -630,7 +632,7 @@ export class SubDAO extends ethereum.SmartContract {
       ]
     );
 
-    return new SubDAO__proposalReceiptsResult(
+    return new ImpactMarketCouncil__proposalReceiptsResult(
       result[0].toBoolean(),
       result[1].toI32(),
       result[2].toBigInt()
@@ -640,7 +642,7 @@ export class SubDAO extends ethereum.SmartContract {
   try_proposalReceipts(
     param0: BigInt,
     param1: Address
-  ): ethereum.CallResult<SubDAO__proposalReceiptsResult> {
+  ): ethereum.CallResult<ImpactMarketCouncil__proposalReceiptsResult> {
     let result = super.tryCall(
       "proposalReceipts",
       "proposalReceipts(uint256,address):(bool,uint8,uint96)",
@@ -654,7 +656,7 @@ export class SubDAO extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new SubDAO__proposalReceiptsResult(
+      new ImpactMarketCouncil__proposalReceiptsResult(
         value[0].toBoolean(),
         value[1].toI32(),
         value[2].toBigInt()
@@ -694,14 +696,14 @@ export class SubDAO extends ethereum.SmartContract {
     return ethereum.CallResult.fromValue(value[0].toString());
   }
 
-  proposals(param0: BigInt): SubDAO__proposalsResult {
+  proposals(param0: BigInt): ImpactMarketCouncil__proposalsResult {
     let result = super.call(
       "proposals",
       "proposals(uint256):(uint256,address,uint256,uint256,uint256,uint256,bool,bool)",
       [ethereum.Value.fromUnsignedBigInt(param0)]
     );
 
-    return new SubDAO__proposalsResult(
+    return new ImpactMarketCouncil__proposalsResult(
       result[0].toBigInt(),
       result[1].toAddress(),
       result[2].toBigInt(),
@@ -713,7 +715,9 @@ export class SubDAO extends ethereum.SmartContract {
     );
   }
 
-  try_proposals(param0: BigInt): ethereum.CallResult<SubDAO__proposalsResult> {
+  try_proposals(
+    param0: BigInt
+  ): ethereum.CallResult<ImpactMarketCouncil__proposalsResult> {
     let result = super.tryCall(
       "proposals",
       "proposals(uint256):(uint256,address,uint256,uint256,uint256,uint256,bool,bool)",
@@ -724,7 +728,7 @@ export class SubDAO extends ethereum.SmartContract {
     }
     let value = result.value;
     return ethereum.CallResult.fromValue(
-      new SubDAO__proposalsResult(
+      new ImpactMarketCouncil__proposalsResult(
         value[0].toBigInt(),
         value[1].toAddress(),
         value[2].toBigInt(),

@@ -16,7 +16,7 @@ test('should add member', () => {
 
     handleMemberAdded(memberAdded);
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[0], 'status', '0');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[0], 'status', '0');
 });
 
 test('should remove member', () => {
@@ -30,5 +30,5 @@ test('should remove member', () => {
 
     handleMemberRemoved(memberRemoved);
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[0], 'status', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[0], 'status', '1');
 });

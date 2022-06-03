@@ -1,5 +1,5 @@
-import { ProposalCanceled, ProposalCreated, ProposalExecuted, VoteCast } from '../../generated/SubDAO/SubDAO';
-import { ProposalEntity, SubDAOMemberEntity } from '../../generated/schema';
+import { ImpactMarketCouncilMemberEntity, ProposalEntity } from '../../generated/schema';
+import { ProposalCanceled, ProposalCreated, ProposalExecuted, VoteCast } from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
 
 export function handleProposalCreated(event: ProposalCreated): void {
     const id = `${event.params.id.toString()}`;
@@ -8,6 +8,7 @@ export function handleProposalCreated(event: ProposalCreated): void {
     if (!proposal) {
         proposal = new ProposalEntity(id);
     }
+    proposal.createdAt = event.block.timestamp.toI32();
     proposal.proposer = event.params.proposer;
     proposal.signatures = event.params.signatures;
     proposal.calldatas = event.params.calldatas;
@@ -40,7 +41,7 @@ export function handleProposalCanceled(event: ProposalCanceled): void {
 
 export function handleVoteCast(event: VoteCast): void {
     const proposal = ProposalEntity.load(event.params.proposalId.toString());
-    const member = SubDAOMemberEntity.load(event.params.voter.toHex());
+    const member = ImpactMarketCouncilMemberEntity.load(event.params.voter.toHex());
 
     if (proposal) {
         switch (event.params.support) {

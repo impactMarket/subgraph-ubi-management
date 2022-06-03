@@ -93,7 +93,7 @@ test('should vote for on proposal', () => {
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAgainst', '[]');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAbstain', '[]');
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[1], 'votes', '1');
 });
 
 test('should vote against on proposal', () => {
@@ -118,7 +118,7 @@ test('should vote against on proposal', () => {
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAgainst', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAbstain', '[]');
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[1], 'votes', '1');
 });
 
 test('should vote abstain on proposal', () => {
@@ -143,7 +143,7 @@ test('should vote abstain on proposal', () => {
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAgainst', '[]');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAbstain', `[${memberAddress[1]}]`);
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[1], 'votes', '1');
 });
 
 test('should vote abstain on proposal', () => {
@@ -168,7 +168,7 @@ test('should vote abstain on proposal', () => {
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAgainst', '[]');
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAbstain', `[${memberAddress[1]}]`);
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[1], 'votes', '1');
 });
 
 test('should receive multiple votes on proposal', () => {
@@ -197,8 +197,8 @@ test('should receive multiple votes on proposal', () => {
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAgainst', `[${memberAddress[2]}]`);
     assert.fieldEquals('ProposalEntity', proposalId.toString(), 'votedAbstain', '[]');
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '1');
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[2], 'votes', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[1], 'votes', '1');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[2], 'votes', '1');
 });
 
 test('should vote in multiple proposals', () => {
@@ -246,5 +246,5 @@ test('should vote in multiple proposals', () => {
     assert.fieldEquals('ProposalEntity', proposalId2.toString(), 'votedAgainst', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId2.toString(), 'votedAbstain', '[]');
 
-    assert.fieldEquals('SubDAOMemberEntity', memberAddress[1], 'votes', '2');
+    assert.fieldEquals('ImpactMarketCouncilMemberEntity', memberAddress[1], 'votes', '2');
 });
