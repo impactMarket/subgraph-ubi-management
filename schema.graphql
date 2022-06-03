@@ -7,6 +7,10 @@ type ProposalEntity @entity {
   """
   id: ID!
   """
+  unix timestamp when the proposal was created
+  """
+  createdAt: Int!
+  """
   proposer address
   """
   proposer: Bytes!

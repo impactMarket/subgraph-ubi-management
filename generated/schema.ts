@@ -16,6 +16,7 @@ export class ProposalEntity extends Entity {
     super();
     this.set("id", Value.fromString(id));
 
+    this.set("createdAt", Value.fromI32(0));
     this.set("proposer", Value.fromBytes(Bytes.empty()));
     this.set("signatures", Value.fromStringArray(new Array(0)));
     this.set("calldatas", Value.fromBytesArray(new Array(0)));
@@ -50,6 +51,15 @@ export class ProposalEntity extends Entity {
 
   set id(value: string) {
     this.set("id", Value.fromString(value));
+  }
+
+  get createdAt(): i32 {
+    let value = this.get("createdAt");
+    return value!.toI32();
+  }
+
+  set createdAt(value: i32) {
+    this.set("createdAt", Value.fromI32(value));
   }
 
   get proposer(): Bytes {

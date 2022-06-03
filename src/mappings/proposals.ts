@@ -8,6 +8,7 @@ export function handleProposalCreated(event: ProposalCreated): void {
     if (!proposal) {
         proposal = new ProposalEntity(id);
     }
+    proposal.createdAt = event.block.timestamp.toI32();
     proposal.proposer = event.params.proposer;
     proposal.signatures = event.params.signatures;
     proposal.calldatas = event.params.calldatas;
