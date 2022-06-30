@@ -261,6 +261,14 @@ export class ImpactMarketCouncil__getActionsResult {
     map.set("value1", ethereum.Value.fromBytesArray(this.value1));
     return map;
   }
+
+  getSignatures(): Array<string> {
+    return this.value0;
+  }
+
+  getCalldatas(): Array<Bytes> {
+    return this.value1;
+  }
 }
 
 export class ImpactMarketCouncil__getReceiptResultValue0Struct extends ethereum.Tuple {
@@ -297,6 +305,18 @@ export class ImpactMarketCouncil__proposalReceiptsResult {
     );
     map.set("value2", ethereum.Value.fromUnsignedBigInt(this.value2));
     return map;
+  }
+
+  getHasVoted(): boolean {
+    return this.value0;
+  }
+
+  getSupport(): i32 {
+    return this.value1;
+  }
+
+  getVotes(): BigInt {
+    return this.value2;
   }
 }
 
@@ -341,6 +361,38 @@ export class ImpactMarketCouncil__proposalsResult {
     map.set("value6", ethereum.Value.fromBoolean(this.value6));
     map.set("value7", ethereum.Value.fromBoolean(this.value7));
     return map;
+  }
+
+  getId(): BigInt {
+    return this.value0;
+  }
+
+  getProposer(): Address {
+    return this.value1;
+  }
+
+  getEndBlock(): BigInt {
+    return this.value2;
+  }
+
+  getForVotes(): BigInt {
+    return this.value3;
+  }
+
+  getAgainstVotes(): BigInt {
+    return this.value4;
+  }
+
+  getAbstainVotes(): BigInt {
+    return this.value5;
+  }
+
+  getCanceled(): boolean {
+    return this.value6;
+  }
+
+  getExecuted(): boolean {
+    return this.value7;
   }
 }
 
