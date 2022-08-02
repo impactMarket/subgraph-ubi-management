@@ -15,17 +15,6 @@ export class ProposalEntity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("createdAt", Value.fromI32(0));
-    this.set("proposer", Value.fromBytes(Bytes.empty()));
-    this.set("signatures", Value.fromStringArray(new Array(0)));
-    this.set("calldatas", Value.fromBytesArray(new Array(0)));
-    this.set("endBlock", Value.fromI32(0));
-    this.set("description", Value.fromString(""));
-    this.set("status", Value.fromI32(0));
-    this.set("votedAgainst", Value.fromBytesArray(new Array(0)));
-    this.set("votedFor", Value.fromBytesArray(new Array(0)));
-    this.set("votedAbstain", Value.fromBytesArray(new Array(0)));
   }
 
   save(): void {
@@ -148,11 +137,6 @@ export class ImpactMarketCouncilMemberEntity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("since", Value.fromI32(0));
-    this.set("until", Value.fromI32(0));
-    this.set("status", Value.fromI32(0));
-    this.set("votes", Value.fromI32(0));
   }
 
   save(): void {
@@ -226,9 +210,6 @@ export class AmbassadorsEntityEntity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("status", Value.fromI32(0));
-    this.set("ambassadors", Value.fromStringArray(new Array(0)));
   }
 
   save(): void {
@@ -284,11 +265,6 @@ export class AmbassadorEntity extends Entity {
   constructor(id: string) {
     super();
     this.set("id", Value.fromString(id));
-
-    this.set("since", Value.fromI32(0));
-    this.set("until", Value.fromI32(0));
-    this.set("status", Value.fromI32(0));
-    this.set("communities", Value.fromBytesArray(new Array(0)));
   }
 
   save(): void {
