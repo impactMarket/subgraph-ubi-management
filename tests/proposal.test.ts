@@ -26,12 +26,21 @@ const descriptions = 'description';
 const voteAgainst = 0;
 const voteFor = 1;
 const voteAbstain = 2;
+const communityAdminAddress = '0x0000000000000000000000000000000000000001';
 
 test('should create proposal', () => {
     clearStore();
 
     const proposalId = 1;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -43,7 +52,15 @@ test('should execute proposal', () => {
     clearStore();
 
     const proposalId = 2;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -59,7 +76,15 @@ test('should cancel proposal', () => {
     clearStore();
 
     const proposalId = 3;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -81,7 +106,15 @@ test('should vote for on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -106,7 +139,15 @@ test('should vote against on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -131,7 +172,15 @@ test('should vote abstain on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -156,7 +205,15 @@ test('should vote abstain on proposal', () => {
     handleMemberAdded(member2);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -183,7 +240,15 @@ test('should receive multiple votes on proposal', () => {
     handleMemberAdded(member3);
 
     const proposalId = 4;
-    const proposal = createProposalCreatedEvent(proposalId, memberAddress[0], signatures, calldatas, 10, descriptions);
+    const proposal = createProposalCreatedEvent(
+        proposalId,
+        memberAddress[0],
+        [communityAdminAddress],
+        signatures,
+        calldatas,
+        10,
+        descriptions
+    );
 
     handleProposalCreated(proposal);
 
@@ -215,6 +280,7 @@ test('should vote in multiple proposals', () => {
     const proposal1 = createProposalCreatedEvent(
         proposalId1,
         memberAddress[0],
+        [communityAdminAddress],
         signatures,
         calldatas,
         10,
@@ -223,6 +289,7 @@ test('should vote in multiple proposals', () => {
     const proposal2 = createProposalCreatedEvent(
         proposalId2,
         memberAddress[0],
+        [communityAdminAddress],
         signatures,
         calldatas,
         10,
@@ -241,7 +308,7 @@ test('should vote in multiple proposals', () => {
     assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votedFor', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votedAgainst', '[]');
     assert.fieldEquals('ProposalEntity', proposalId1.toString(), 'votedAbstain', '[]');
-    
+
     assert.fieldEquals('ProposalEntity', proposalId2.toString(), 'votedFor', '[]');
     assert.fieldEquals('ProposalEntity', proposalId2.toString(), 'votedAgainst', `[${memberAddress[1]}]`);
     assert.fieldEquals('ProposalEntity', proposalId2.toString(), 'votedAbstain', '[]');

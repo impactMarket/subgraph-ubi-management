@@ -146,6 +146,48 @@ export class ProposalCreated__Params {
   }
 }
 
+export class ProposalCreated1 extends ethereum.Event {
+  get params(): ProposalCreated1__Params {
+    return new ProposalCreated1__Params(this);
+  }
+}
+
+export class ProposalCreated1__Params {
+  _event: ProposalCreated1;
+
+  constructor(event: ProposalCreated1) {
+    this._event = event;
+  }
+
+  get id(): BigInt {
+    return this._event.parameters[0].value.toBigInt();
+  }
+
+  get proposer(): Address {
+    return this._event.parameters[1].value.toAddress();
+  }
+
+  get targets(): Array<Address> {
+    return this._event.parameters[2].value.toAddressArray();
+  }
+
+  get signatures(): Array<string> {
+    return this._event.parameters[3].value.toStringArray();
+  }
+
+  get calldatas(): Array<Bytes> {
+    return this._event.parameters[4].value.toBytesArray();
+  }
+
+  get endBlock(): BigInt {
+    return this._event.parameters[5].value.toBigInt();
+  }
+
+  get description(): string {
+    return this._event.parameters[6].value.toString();
+  }
+}
+
 export class ProposalExecuted extends ethereum.Event {
   get params(): ProposalExecuted__Params {
     return new ProposalExecuted__Params(this);
