@@ -1,7 +1,7 @@
 import { ImpactMarketCouncilMemberEntity, ProposalEntity } from '../../generated/schema';
-import { ProposalCanceled, ProposalCreated, ProposalExecuted, VoteCast } from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
+import { ProposalCanceled, ProposalCreated, ProposalCreated1, ProposalExecuted, VoteCast } from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
 
-export function handleProposalCreated(event: ProposalCreated): void {
+export function handleProposalCreatedOld(event: ProposalCreated): void {
     const id = `${event.params.id.toString()}`;
     let proposal = ProposalEntity.load(id);
 
@@ -10,6 +10,27 @@ export function handleProposalCreated(event: ProposalCreated): void {
     }
     proposal.createdAt = event.block.timestamp.toI32();
     proposal.proposer = event.params.proposer;
+    proposal.signatures = event.params.signatures;
+    proposal.calldatas = event.params.calldatas;
+    proposal.endBlock = event.params.endBlock.toI32();
+    proposal.description = event.params.description;
+    proposal.status = 0;
+    proposal.votedAgainst = [];
+    proposal.votedFor = [];
+    proposal.votedAbstain = [];
+    proposal.save();
+}
+
+export function handleProposalCreated(event: ProposalCreated1): void {
+    const id = `${event.params.id.toString()}`;
+    let proposal = ProposalEntity.load(id);
+
+    if (!proposal) {
+        proposal = new ProposalEntity(id);
+    }
+    proposal.createdAt = event.block.timestamp.toI32();
+    proposal.proposer = event.params.proposer;
+    // proposal.targets = event.params.targets;
     proposal.signatures = event.params.signatures;
     proposal.calldatas = event.params.calldatas;
     proposal.endBlock = event.params.endBlock.toI32();
