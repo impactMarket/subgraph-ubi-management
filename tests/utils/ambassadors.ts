@@ -1,8 +1,13 @@
 /* global changetype */
-import { Address, BigInt, Bytes, ethereum } from '@graphprotocol/graph-ts';
-import { AmbassadorAdded, AmbassadorRemoved, EntityAccountReplaced, EntityAdded, EntityRemoved } from '../../generated/Ambassadors/Ambassadors';
+import { Address, BigInt, ethereum } from '@graphprotocol/graph-ts';
+import {
+    AmbassadorAdded,
+    AmbassadorRemoved,
+    EntityAccountReplaced,
+    EntityAdded,
+    EntityRemoved
+} from '../../generated/Ambassadors/Ambassadors';
 import { newMockEvent } from 'matchstick-as/assembly/defaults';
-
 
 export function createEntityAddedEvent(entity: string): EntityAdded {
     const entityAddedEvent = changetype<EntityAdded>(newMockEvent());
@@ -26,13 +31,26 @@ export function createEntityRemovedEvent(entity: string): EntityRemoved {
     return entityRemovedEvent;
 }
 
-export function createEntityAccountReplacedEvent(entityIndex: i32, oldAccount: string, newAccount: string): EntityAccountReplaced {
+export function createEntityAccountReplacedEvent(
+    entityIndex: i32,
+    oldAccount: string,
+    newAccount: string
+): EntityAccountReplaced {
     const entityAccountReplacedEvent = changetype<EntityAccountReplaced>(newMockEvent());
 
     entityAccountReplacedEvent.parameters = [];
-    const entityIndexParam = new ethereum.EventParam('entityIndex', ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(entityIndex)));
-    const oldAccountParam = new ethereum.EventParam('oldAccount', ethereum.Value.fromAddress(Address.fromString(oldAccount)));
-    const newAccountParam = new ethereum.EventParam('newAccount', ethereum.Value.fromAddress(Address.fromString(newAccount)));
+    const entityIndexParam = new ethereum.EventParam(
+        'entityIndex',
+        ethereum.Value.fromUnsignedBigInt(BigInt.fromI32(entityIndex))
+    );
+    const oldAccountParam = new ethereum.EventParam(
+        'oldAccount',
+        ethereum.Value.fromAddress(Address.fromString(oldAccount))
+    );
+    const newAccountParam = new ethereum.EventParam(
+        'newAccount',
+        ethereum.Value.fromAddress(Address.fromString(newAccount))
+    );
 
     entityAccountReplacedEvent.parameters.push(entityIndexParam);
     entityAccountReplacedEvent.parameters.push(oldAccountParam);
@@ -45,7 +63,10 @@ export function createAmbassadorAddedEvent(ambassador: string, entity: string): 
     const ambassadorAddedEvent = changetype<AmbassadorAdded>(newMockEvent());
 
     ambassadorAddedEvent.parameters = [];
-    const ambassadorParam = new ethereum.EventParam('ambassador', ethereum.Value.fromAddress(Address.fromString(ambassador)));
+    const ambassadorParam = new ethereum.EventParam(
+        'ambassador',
+        ethereum.Value.fromAddress(Address.fromString(ambassador))
+    );
     const entityParam = new ethereum.EventParam('entity', ethereum.Value.fromAddress(Address.fromString(entity)));
 
     ambassadorAddedEvent.parameters.push(ambassadorParam);
@@ -58,7 +79,10 @@ export function createAmbassadorRemovedEvent(ambassador: string, entity: string)
     const ambassadorRemovedEvent = changetype<AmbassadorRemoved>(newMockEvent());
 
     ambassadorRemovedEvent.parameters = [];
-    const ambassadorParam = new ethereum.EventParam('ambassador', ethereum.Value.fromAddress(Address.fromString(ambassador)));
+    const ambassadorParam = new ethereum.EventParam(
+        'ambassador',
+        ethereum.Value.fromAddress(Address.fromString(ambassador))
+    );
     const entityParam = new ethereum.EventParam('entity', ethereum.Value.fromAddress(Address.fromString(entity)));
 
     ambassadorRemovedEvent.parameters.push(ambassadorParam);

@@ -1,5 +1,11 @@
 import { ImpactMarketCouncilMemberEntity, ProposalEntity } from '../../generated/schema';
-import { ProposalCanceled, ProposalCreated, ProposalCreated1, ProposalExecuted, VoteCast } from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
+import {
+    ProposalCanceled,
+    ProposalCreated,
+    ProposalCreated1,
+    ProposalExecuted,
+    VoteCast
+} from '../../generated/ImpactMarketCouncil/ImpactMarketCouncil';
 
 export function handleProposalCreatedOld(event: ProposalCreated): void {
     const id = `${event.params.id.toString()}`;

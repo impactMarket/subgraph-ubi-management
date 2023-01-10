@@ -1,10 +1,7 @@
 import { assert, clearStore, test } from 'matchstick-as/assembly/index';
 
 import { createMemberAddedEvent, createMemberRemovedEvent } from './utils/members';
-import {
-    handleMemberAdded,
-    handleMemberRemoved
-} from '../src/mappings/members';
+import { handleMemberAdded, handleMemberRemoved } from '../src/mappings/members';
 import { memberAddress } from './utils/constants';
 
 export { handleMemberAdded, handleMemberRemoved };
