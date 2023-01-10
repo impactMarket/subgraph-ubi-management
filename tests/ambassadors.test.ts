@@ -1,7 +1,12 @@
 import { assert, clearStore, test } from 'matchstick-as/assembly/index';
 
 import { ambassadorAddress, entityAddress } from './utils/constants';
-import { createAmbassadorAddedEvent, createAmbassadorRemovedEvent, createEntityAddedEvent, createEntityRemovedEvent } from './utils/ambassadors';
+import {
+    createAmbassadorAddedEvent,
+    createAmbassadorRemovedEvent,
+    createEntityAddedEvent,
+    createEntityRemovedEvent
+} from './utils/ambassadors';
 import {
     handleAmbassadorAdded,
     handleAmbassadorRemoved,
