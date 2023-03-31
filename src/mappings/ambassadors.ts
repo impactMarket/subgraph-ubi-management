@@ -178,17 +178,20 @@ export function handleAmbassadorToCommunityUpdated(event: AmbassadorToCommunityU
 
 export function handleCommunityRemoved(event: CommunityRemoved): void {
     const id = `${event.params.ambassador.toHex()}`;
-    const ambassador = AmbassadorEntity.load(id)!;
+    const ambassador = AmbassadorEntity.load(id);
 
-    const communitiesFrom = ambassador.communities;
-    const newCommunitiesFrom: Bytes[] = [];
+    // very old communities might not have ambassadors setup
+    if (ambassador) {
+        const communitiesFrom = ambassador.communities;
+        const newCommunitiesFrom: Bytes[] = [];
 
-    for (let i = 0; i < communitiesFrom.length; i++) {
-        if (communitiesFrom[i].notEqual(event.params.community)) {
-            newCommunitiesFrom.push(communitiesFrom[i]);
+        for (let i = 0; i < communitiesFrom.length; i++) {
+            if (Address.fromString(communitiesFrom[i].toHex()).notEqual(event.params.community)) {
+                newCommunitiesFrom.push(communitiesFrom[i]);
+            }
         }
-    }
-    ambassador.communities = communitiesFrom;
+        ambassador.communities = newCommunitiesFrom;
 
-    ambassador.save();
+        ambassador.save();
+    }
 }

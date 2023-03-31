@@ -1,3 +1,8 @@
+const communityAddress: string[] = [
+    '0x1cad798788568098e51c5751fe03a8daa0c7eac6',
+    '0x6a15bd0445e00b1705e0f02ad2e60902c1cbcc3e'
+];
+
 const memberAddress: string[] = [
     '0x270ec2751810dae7a1e7377dc77f9098ac9b5bce',
     '0x0c60e23d0077cc284e47fad05f133d7c50bc030d',
@@ -17,4 +22,4 @@ const ambassadorAddress: string[] = [
     '0x6fa13587fec055aa1f325f0db19147fc7580afc4'
 ];
 
-export { ambassadorAddress, memberAddress, entityAddress };
+export { ambassadorAddress, communityAddress, memberAddress, entityAddress };
