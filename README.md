@@ -1,5 +1,7 @@
 # subgraph-ubi-management
 
+:warning: This repository was merged with *subgraph* here https://github.com/impactMarket/subgraph/pull/89 and is no longer maintained!
+
 ## Test
 In order to test, you need matchstick. You can use docker or the binary
 
